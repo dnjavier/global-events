@@ -7,13 +7,23 @@
       <h3 class="text-center">{{ profile.getCurrentUser().name }}</h3>
     </div>
   
-  <ul>
+  <!-- Desktop Menu -->
+  <ul class="hidden-xs">
+    <li><a ui-sref=".myevents"><i class="fa fa-home"></i>My events</a></li>
+    <li><a ui-sref="profile.newevent({_id: getCurrentUser().name})"><i class="fa fa-bullhorn"></i>New event</a></li>
+    <li><a href="#"><i class="fa fa-comments"></i>Contact</a></li>
+    <li><a ui-sref="logout"><i class="fa fa-sign-out"></i>Logout</a></li>
+  </ul>
+
+  <!-- Mobile Menu -->
+  <ul class="hidden-sm hidden-md hidden-lg">
     <li><a ui-sref=".myevents" ng-click="profile.changeMenu()"><i class="fa fa-home"></i>My events</a></li>
     <li><a ui-sref="profile.newevent({_id: getCurrentUser().name})"
         ng-click="profile.changeMenu()"><i class="fa fa-bullhorn"></i>New event</a></li>
     <li><a href="#" ng-click="profile.changeMenu()"><i class="fa fa-comments"></i>Contact</a></li>
     <li><a ui-sref="logout"><i class="fa fa-sign-out"></i>Logout</a></li>
   </ul>
+
   </div>
 </div>
 <!-- /#sidebar-wrapper -->

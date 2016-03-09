@@ -39,34 +39,28 @@ class NeweventController {
 
 
     if(this.validateFields(event)) {
-      this.files = document.getElementById('uploader').files;
-      var file = this.files[0];
-
-      file.upload = this.upload.upload({
+      event.file.upload = this.upload.upload({
         url: "https://api.cloudinary.com/v1_1/dlxqbg8py/upload",
         data: {
           upload_preset: 'pt4fy7fd',
           tags: 'events',
-          //eager: '',
           context: 'photo=test',
-          file: file
+          file: event.file
         }
       }).progress(function (e) {
-        file.progress = Math.round((e.loaded * 100.0) / e.total);
-        file.status = "Uploading... " + file.progress + "%";
+        event.file.progress = Math.round((e.loaded * 100.0) / e.total);
+        event.file.status = "Uploading... " + event.file.progress + "%";
         
       }).success(function (data, status, headers, config) {
         event.image = splitURL(data.url);        
         createToBD();
 
       }).error(function (data, status, headers, config) {
-        file.result = data;
+        event.file.result = data;
         console.log('error: ');
         console.log(data);
       });
 
-    } else {
-      console.log('please fillout correctly');
     }
 
     function createToBD() {
@@ -133,13 +127,22 @@ class NeweventController {
   }
 
   validateFields(e){
+    this.files = document.getElementById('uploader').files;
+    e.file = this.files[0];
+
     if(e.title > ''
       && typeof e.where !== 'undefined'
       && typeof e.category !== 'undefined'
       && e.desc > ''
-      && e.qty > 0) {
-      return true;
+      && e.qty > 0
+      && e.price >= 0
+      && e.limitAge >= 0
+    ) {      
+      if(typeof e.file !== 'undefined' || typeof e.image !== 'undefined'){
+        return true;
+      }
     }
+    console.log('Please fill out correctly');
     return false;
   }
 
@@ -160,9 +163,11 @@ class NeweventController {
   }
 
   updateEvent(event) {
-    this.events.updateEvent(event).then(response => {
-      this.$state.go('profile.myevents')
-    });
+    if(this.validateFields(event)){
+      this.events.updateEvent(event).then(response => {
+        this.$state.go('profile.myevents')
+      });
+    }    
   }
 
 }
