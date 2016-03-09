@@ -41,11 +41,11 @@
     <!-- CAROUSEL -->
     <div class="col-md-8">
       <uib-carousel interval="5000" no-wrap="false">
-        <uib-slide ng-repeat="slide in main.eventSlider" active="slide.active" index="slide.id">
+        <uib-slide ng-repeat="slide in main.eventSlider | limitTo:6" active="slide.active" index="slide._id">
           <img ng-src="{{slide.image}}" class="img-responsive">
           <div class="carousel-caption">
-            <div><h4>Slide {{slide.text}}</h4>
-            <p>{{slide.text}}</p></div>
+            <div><h4>{{slide.title}}</h4>
+            <p>{{slide.title}}</p></div>
           </div>
         </uib-slide>
       </uib-carousel>

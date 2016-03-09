@@ -12,13 +12,13 @@ class MainController {
 
     this.$http = $http;
 
-    this.listOptions = this.getListOptions();
-    this.eventSlider = this.getEventSlider();
+    this.listOptions = this.getListOptions();    
     this.mainOptions = this.getMainOptions();
 
     //Get events from DB
     events.getAll().then(response => {
       this.eventList = response.data;
+      this.eventSlider = this.getEventSlider(this.eventList);
     });    
 
    /* $http.get('/api/things').then(response => {
@@ -77,16 +77,19 @@ class MainController {
     ]
   }
 
-  getEventSlider() {
-    return [
-      //Este es un ejemplo de carousel: ui-bootstrap carousel
-      {image: 'assets/images/concierto.png',
-        text: 'Concert',
-        id: 0},
-      {image: 'assets/images/baseball.png',
-        text: 'baseball Game',
-        id: 1}
-    ]
+  getEventSlider(eventList) {
+    let eventSlider = [];
+
+    for(let i=0; i<eventList.length; i++){
+      let eObj = {};
+      eObj.image = eventList[i].image;
+      eObj.title = eventList[i].title;
+      eObj.desc = eventList[i].desc;
+      eObj.id = eventList[i]._id;
+
+      eventSlider.push(eObj);
+    }
+    return eventSlider;
   }
 
   searchEvent(text) {
