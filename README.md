@@ -1,2 +1,0 @@
-# global-events
-Event manager
