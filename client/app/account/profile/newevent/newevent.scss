@@ -1,0 +1,37 @@
+.new-event {
+  background-color: #f3f3f3;
+  margin-top: -20px;
+  
+  form {
+    margin: 30px 0;
+
+    textarea {
+      resize: none;
+    }
+
+    input[type=checkbox] {
+      display: block;
+    }
+
+    @media (max-width: 480px) {
+      label {
+        font-size: 2rem;
+      }
+
+      img {
+        margin-bottom: 20px;
+      }
+
+      .btn {
+        display: block;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .btn-default {
+    background-color: #A8C545;
+    color: #1b1b1b;
+  }
+  
+}

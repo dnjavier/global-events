@@ -1,0 +1,96 @@
+<navbar></navbar>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <div class="row">
+      
+      <!-- category options -->
+      <div class="col-md-8 hidden-xs">
+        <ul>
+          <li ng-repeat="option in main.listOptions">
+            <a ui-sref="catevents({ category: option.category })">
+              <div>
+                <i class="{{ option.iconClass }}"></i><br>
+                {{ option.title }}
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="col-md-4">
+        <div class="box">
+          <div class="container-4">
+            <input type="search" id="search" placeholder="Search..." 
+                  ng-model="main.searchText"/>
+            <button class="icon"
+                  ng-click="main.searchEvent(main.searchText)"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </div>
+      <!-- END Search Bar -->
+    </div>    
+    
+  </div>
+</header>
+
+<div class="container main-content">
+
+  <div class="row">
+    <!-- CAROUSEL -->
+    <div class="col-md-8">
+      <uib-carousel interval="5000" no-wrap="false">
+        <uib-slide ng-repeat="slide in main.eventSlider" active="slide.active" index="slide.id">
+          <img ng-src="{{slide.image}}" class="img-responsive">
+          <div class="carousel-caption">
+            <div><h4>Slide {{slide.text}}</h4>
+            <p>{{slide.text}}</p></div>
+          </div>
+        </uib-slide>
+      </uib-carousel>
+      <!-- END CAROUSEL -->
+    </div>
+    
+    <!-- UPCOMING EVENTS -->
+    <div class="col-md-4 upcoming-events">
+      <p><i class="fa fa-calendar"></i>UPCOMING EVENTS</p>
+      <ul>
+        <li ng-repeat="event in main.eventList | limitTo:6 | orderBy: 'date'">
+        <a ui-sref="events({ idEvent: event._id })">
+          <div class="event-date">
+            <p>{{ event.date | date:'d' }}</p>
+            <p>{{ event.date | date:'MMM' }}</p>
+          </div>
+          <div>
+            <p>{{ event.title }}</p><br>
+            <p>{{ event.where }}</p>
+          </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- END UPCOMING EVENTS -->
+  </div>
+
+  <!-- MAIN Options -->
+  <div class="row">
+    <div class="main-options">
+      <div ng-repeat="opt in main.mainOptions" class="col-xs-3">
+        <a ui-sref="{{opt.state}}" ng-click="main.changeToActive(main.mainOptions, opt)">
+          <i class="{{opt.icon}}" ng-class="{'i-active' : opt.active}"></i>
+          <p ng-class="{'active' : opt.active}">{{opt.text}}</p>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+    <div ui-view></div>
+
+  </div>
+  <!-- END MAIN Options -->
+
+</div>
+
+<footer></footer>

@@ -1,0 +1,40 @@
+<div class="profile">
+  <div id="wrapper" class="{{profile.menuClass}}">
+
+      <sidebar></sidebar>
+
+      <!-- Page Content -->
+      <div> <!-- id="page-content-wrapper" -->
+          
+          <nav class="navbar navbar-default">
+            <div class="container">
+              <div class="navbar-header">
+                <div class="menu-toggle {{ profile.showMenu }} hidden-lg"
+                    ng-click="profile.changeMenu()">
+                  <div class="one"></div>
+                  <div class="two"></div>
+                  <div class="three"></div>
+                </div>
+
+                <h3 class="text-center">My events</h3>
+              </div>
+            </div>
+          </nav>
+
+          <div class="container body">
+              <div class="row">
+                <div class="col-md-12">
+                  
+                  <div ui-view></div>
+                  
+                </div>
+              </div>
+
+              
+          </div>
+      </div>
+      <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->  
+</div>

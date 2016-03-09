@@ -1,0 +1,116 @@
+<div class="new-event">
+  <div class="container">
+    
+    <form>
+      <div class="row">
+        <div class="form-group col-xs-12 col-md-6">
+          <label for="title">Title</label>
+          <input ng-model="new.event.title" type="text" class="form-control" id="title">
+        </div>
+
+        <div class="form-group col-xs-6 col-md-3">
+          <label for="where">Where</label>
+          <select class="form-control" ng-model="new.event.where">
+            <option disabled selected value="">Select</option>
+            <option ng-repeat="opt in new.whereOptions">{{ opt }}</option>
+          </select>
+        </div>
+
+        <div class="form-group col-xs-6 col-md-3">
+          <label for="category">Category</label>
+          <select class="form-control" ng-model="new.event.category">
+            <option disabled selected value="">Select</option>
+            <option ng-repeat="opt in new.categoryOptions">{{ opt }}</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="desc">Description</label>
+          <textarea id="desc" ng-model="new.event.desc" class="form-control" rows="5"></textarea>
+        </div>
+
+        <div class="form-group col-md-2">
+          <label for="price">Price</label>
+          <input ng-model="new.event.price" type="number" class="form-control" id="price">
+        </div>
+
+        <div class="form-group col-xs-6 col-md-2">
+          <label for="qty">Tickets QTY</label>
+          <input ng-model="new.event.qty" type="number" class="form-control" id="qty">
+        </div>
+
+        <div class="form-group col-xs-6 col-md-2">
+          <label for="limitAge">Limit age</label>
+          <input ng-model="new.event.limitAge" type="number" class="form-control" id="limitAge">
+        </div>
+
+        <div class="form-group col-xs-6 col-md-2">
+          <label for="data">Date</label>
+            <p class="input-group">
+              <input type="text" class="form-control" 
+              uib-datepicker-popup ng-model="new.event.date" 
+              is-open="new.popup1.opened" datepicker-options="new.dateOptions" 
+              close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" 
+                ng-click="new.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>          
+        </div> 
+
+        <div class="form-group col-xs-6 col-md-2">
+          <label>Choose seat</label>
+          <input ng-model="new.event.chooseSeat" type="checkbox"> 
+        </div>
+
+      </div>
+
+      <div class="row">      
+
+        <div class="form-group col-md-2">
+          <label for="doors">Open doors</label>
+          <uib-timepicker ng-model="new.event.openDoors" show-meridian="true"></uib-timepicker>
+        </div> 
+
+        <div class="form-group col-md-3">
+          <label for="img">Image</label>
+          <input type="file" id="uploader"/>
+          <p class="help-block">{{file.name}}</p>
+        </div>
+        
+        <div class="col-md-4">
+          <p class="help-block">{{new.files[0].name}}</p>
+          <div class="status">{{new.files[0].status}}</div>
+          <div class="progress-bar">
+            <div class="progress" style="width: {{new.files[0].progress}}%" ng-init="progress=0"></div>
+          </div>
+          <div class="form_line">
+            <div class="form_controls">
+
+              <div class="preview">
+                <img ngf-src="new.event.image || new.files[0]" class="img-responsive">
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row text-right">
+        <button ng-click="new.create(new.event)" 
+                type="submit" 
+                ng-if="!new.edit"
+                class="btn btn-default">Create</button>
+
+        <button ng-click="new.updateEvent(new.event)" 
+                type="submit" 
+                ng-if="new.edit"
+                class="btn btn-default">Save</button>
+      </div>
+      </form>
+
+    
+  </div>
+</div>

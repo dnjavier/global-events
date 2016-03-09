@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row"> 
+
+    <div class="col-xs-6 col-xs-offset-3 col-sm-2 col-md-offset-0 col-md-2">
+      <img src="assets/images/logo-blanco.png" class="img-responsive" alt="">
+    </div>
+
+    <div class="col-xs-6 col-sm-2 col-md-2">
+      <h3>company</h3>
+      <ul>
+        <li><a href="">About</a></li>
+        <li><a href="">Careers</a></li>
+        <li><a href="">News</a></li>
+      </ul>
+    </div>
+
+    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+      <h3>community</h3>
+      <ul>
+        <li><a href="">Organizers</a></li>
+        <li><a href="">Events</a></li>
+        <li><a href="">People</a></li>
+      </ul>
+    </div>
+
+    <div class="col-xs-6 col-sm-2 col-md-2 col-lg-2">
+      <h3>useful links</h3>
+      <ul>
+        <li><a href="">FAQ</a></li>
+        <li><a href="">Help center</a></li>
+        <li><a href="">Accounts</a></li>
+      </ul>
+    </div>
+
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      <ul class="nav navbar-nav navbar-right">
+        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active">
+          <a ui-sref="signup" ng-click="foot.scrollTo('navbar')">Sign up</a>
+        </li>
+        <li ng-hide="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
+        <li ng-show="nav.isLoggedIn()"><p class="navbar-text">Hello {{ nav.getCurrentUser().name }}</p> </li>
+        <li ng-show="nav.isLoggedIn()" ui-sref-active="active"><a ui-sref="settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="nav.isLoggedIn()"><a ui-sref="logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,60 @@
+<navbar></navbar>
+
+<div class="container events">
+  <div class="row">
+
+    <div class="col-md-6 left-side">
+      <img src="{{ events.event.image }}" class="img-responsive" alt="">
+    </div>
+
+    <div class="col-md-6 right-side">
+      <h1>{{ events.event.title }}</h1>
+      <p>Day: {{ events.event.date | date:'d' }}, {{events.event.date | date:'MMMM' }}</p>
+      <p>Time: {{ events.event.openDoors | date:'h' }}:{{ events.event.openDoors | date:'mm' }} {{ events.event.openDoors | date:'a' }}</p>
+      <p>{{ events.event.desc }}</p>
+      <p>{{ events.event.where }}</p>
+      <p>Price: {{ events.event.price }}</p>
+      <p>Organized by, {{ events.event.organizer }}</p>
+
+      <button type="button" class="btn">Buy tickets</button>
+    </div>
+  </div>
+    <!-- <div class="row">
+      <div class="col-md-12">
+        Available dates:
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="container-fluid">
+
+          <div class="row title">
+            <div class="col-md-12">
+              <h4>Other events you may like:</h4>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 event-category"
+                  ng-repeat="evt in this.events.eventsFiltered | limitTo: 4">
+              <div>
+                <div class="event-date">
+                  <p>{{ evt.date | date:'d' }}</p>
+                  <p>{{ evt.date | date:'MMM' }}</p>
+                </div>
+                <h3>{{ evt.title | limitTo: 15 }}...</h3>
+                <p>{{ evt.desc }}</p>
+              </div>
+              <a ui-sref="events({ idEvent: evt._id })">See more</a>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+  
+</div>
+
+<footer></footer>

@@ -1,0 +1,53 @@
+footer.footer {
+  background-color: #000;
+  padding: 10rem 0 6rem;
+  //Sticky footer
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+
+  .col-md-2 {
+    padding: 0 15px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      a {
+        color: #333333; 
+      }
+
+      a:hover {
+        text-decoration: none;
+        color: #fff; 
+      }
+    }
+  }
+
+  h3 {
+    color: #919496;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin: 12px 0;
+  }
+
+  .col-md-4 {
+    a {
+      color: #919496;
+    }
+
+    a:hover, a:focus {
+      background-color: transparent;
+      color: #A8C545;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  footer.footer {
+    padding: 4rem 0 6rem;
+    text-align: center;
+    font-size: 16px;
+  }
+}

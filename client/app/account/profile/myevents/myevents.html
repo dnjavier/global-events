@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-md-3 box-event"
+      ng-repeat="e in my.myEvents">
+    <div class="event-row">
+      <div class="event-date">
+        <p>{{e.date | date:'d'}}</p>
+        <p>{{e.date | date:'MMM'}}</p>
+      </div>
+      <h3>{{ e.title | limitTo: 19 }}</h3>
+      <p>{{ e.desc }}</p>
+      <div class="event-buttons">
+        <a ui-sref="profile.newevent({_id: e._id})" class="btn btn-default btn-sm">Edit</a>
+        <button class="btn btn-default btn-sm"
+            ng-click="my.deleteEvent(e)">Delete</button>
+      </div>
+    </div>            
+  </div>
+</div>

@@ -1,0 +1,29 @@
+//Options Info
+.option-info {
+  padding: 5rem 3rem;
+
+  .row {
+    margin: 0;
+  }
+  
+  .left-side {
+    color: #fff;
+    font-size: 20px;
+  }
+  
+  .right-side {
+
+    .logo {
+      background-color: #fff;
+      width: 55%;
+      border-radius: 20px;
+      padding: 10px;
+    }
+
+    .logo, img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+//END options info
