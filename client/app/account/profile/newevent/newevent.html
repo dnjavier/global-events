@@ -55,7 +55,7 @@
               close-text="Close"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" 
-                ng-click="new.open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                ng-click="new.openCalendar()"><i class="glyphicon glyphicon-calendar"></i></button>
               </span>
             </p>          
         </div> 
@@ -104,7 +104,7 @@
                 ng-if="!new.edit"
                 class="btn btn-default">Create</button>
 
-        <button ng-click="new.updateEvent(new.event)" 
+        <button ng-click="new.create(new.event)" 
                 type="submit" 
                 ng-if="new.edit"
                 class="btn btn-default">Save</button>

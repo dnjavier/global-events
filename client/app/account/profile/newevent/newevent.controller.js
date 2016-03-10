@@ -29,67 +29,84 @@ class NeweventController {
     //file
     vm.upload = Upload;
     vm.files = [];
+    vm.cloudObj = {
+      url: 'https://api.cloudinary.com/v1_1/dlxqbg8py/upload',
+      data: {
+        upload_preset: 'pt4fy7fd',
+        tags: 'events',
+        context: 'photo=test'
+      }
+    };
   }
 
+  //Function called when create an update an event
   create(event) {
     var events = this.events;
     var cleanFields = this.cleanFields;
     var $state = this.$state;
     var setEvent = this.setEvent;
-
+    var createToBD = this.createToBD;
+    var splitURL = this.splitURL;
+    this.cloudObj.data.file = document.getElementById('uploader').files[0];
 
     if(this.validateFields(event)) {
-      event.file.upload = this.upload.upload({
-        url: "https://api.cloudinary.com/v1_1/dlxqbg8py/upload",
-        data: {
-          upload_preset: 'pt4fy7fd',
-          tags: 'events',
-          context: 'photo=test',
-          file: event.file
-        }
-      }).progress(function (e) {
-        event.file.progress = Math.round((e.loaded * 100.0) / e.total);
-        event.file.status = "Uploading... " + event.file.progress + "%";
-        
-      }).success(function (data, status, headers, config) {
-        event.image = splitURL(data.url);        
-        createToBD();
-
-      }).error(function (data, status, headers, config) {
-        event.file.result = data;
-        console.log('error: ');
-        console.log(data);
-      });
-
-    }
-
-    function createToBD() {
-      events.create(event).then(function success(res){
-        console.log('success');
-        $state.go('profile.myevents');
-      }, function error(res){
-        console.log('error');
-      });
-    }
-
-    function splitURL(url){
-      let arrUrl = url.split('/');
-      url = '';
-      for(let i=0; i<arrUrl.length; i++){
-        if(i == 6){
-          url += 'w_750,h_500/'
-        }
-        if(i == 7) {
-          url += arrUrl[i];
-        } else {
-          url += arrUrl[i] + '/';
-        }                
+      var callback;
+      if(!this.edit){
+        callback = this.createToBD;
+      } else {
+        callback = this.updateToDB;
       }
-      return url;
+      this.uploadImage(event, this.upload, this.cloudObj, callback, splitURL, events, $state);
     }
       
   }
 
+  //Upload the image to Cloudinary
+  uploadImage(event, upload, cloudObj, callback, splitURL, events, $state) {
+    event.file.upload = upload.upload(cloudObj)
+    .progress(function (e) {
+      event.file.progress = Math.round((e.loaded * 100.0) / e.total);
+      event.file.status = "Uploading... " + event.file.progress + "%";
+      
+    }).success(function (data, status, headers, config) {
+      event.image = splitURL(data.url);        
+      callback(events, event, $state);
+
+    }).error(function (data, status, headers, config) {
+      event.file.result = data;
+      console.log('error: ');
+      console.log(data);
+    });
+  }
+
+  //Call the events service to save in DB
+  createToBD(events, event, $state) {
+    events.create(event).then(function success(res){
+      console.log('success');
+      $state.go('profile.myevents');
+    }, function error(res){
+      console.log('error');
+    });
+  }
+
+  //Modifies the image URL to get size needed
+  splitURL(url) {
+    let arrUrl = url.split('/');
+    url = '';
+    for(let i=0; i<arrUrl.length; i++){
+      if(i == 6){
+        url += 'w_750,h_500/'
+      }
+      if(i == 7) {
+        url += arrUrl[i];
+      } else {
+        url += arrUrl[i] + '/';
+      }                
+    }
+    return url;
+  }
+
+  //Initialize the Date variable
   setEvent(organizer) {
     var event = {
       date: new Date(),
@@ -100,6 +117,7 @@ class NeweventController {
     return event;
   }
 
+  //Initialize the Time variable
   setDatePicker() {
     return {
       maxDate: new Date(2020, 5, 22),
@@ -108,6 +126,7 @@ class NeweventController {
     }
   }
 
+  //These are the select options for where
   getWhereOptions() {
     return [
       'Estadio Nacional',
@@ -116,6 +135,7 @@ class NeweventController {
     ];
   }
 
+  //These are the select options for Category
   getCategoryOptions() {
     return [
       'Music',
@@ -126,6 +146,7 @@ class NeweventController {
     ];
   }
 
+  //All the inputs must be filled
   validateFields(e){
     this.files = document.getElementById('uploader').files;
     e.file = this.files[0];
@@ -146,15 +167,12 @@ class NeweventController {
     return false;
   }
 
-  open1() {
+  //Displays the calendar in the view
+  openCalendar() {
     this.popup1.opened = true;
   };
 
-  imgUploaded(image) {
-    console.log('imgUploaded');
-    this.image = image;
-  }
-
+  //When edit an event, it must fill the inputs
   searchEvent(_id) {
     this.events.getOne(_id).then(response => {
       this.event = response.data;
@@ -162,12 +180,11 @@ class NeweventController {
     });
   }
 
-  updateEvent(event) {
-    if(this.validateFields(event)){
-      this.events.updateEvent(event).then(response => {
-        this.$state.go('profile.myevents')
-      });
-    }    
+  //Called when update the event
+  updateToDB(events, event, $state) {
+    events.updateEvent(event).then(response => {
+      $state.go('profile.myevents')
+    });   
   }
 
 }
