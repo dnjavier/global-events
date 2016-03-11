@@ -4,21 +4,30 @@
 
 class EventsController {
 
-  constructor(events, $stateParams) {
+  constructor(events, $stateParams, modalbuy, $uibModal, $log) { 
     this.events = events;
     this.eventsFiltered = [];
 
-    var idEvent = $stateParams.idEvent;
+    //Modal
+    this.modalbuy = modalbuy;
+    this.$uibModal = $uibModal;
+    this.$log = $log;
 
-    //Get event from DB
-    events.getOne(idEvent).then(response => {
+    var idEvent = $stateParams.idEvent;
+    //Find event and filter category
+    this.getEventDB(idEvent);
+
+  }  
+
+  //Find event by ID from DB
+  getEventDB(idEvent){
+    this.events.getOne(idEvent).then(response => {
       this.event = response.data;
       this.filterEvents(this.event.category);
     });
-
   }
 
-  //Functions
+  //Filter Events by Category
   filterEvents(category) {
     this.events.getAll().then(response => {
       var data = response.data;
@@ -32,6 +41,13 @@ class EventsController {
       }
       this.eventsFiltered = filtered;
     });
+  }
+
+  /*** 
+  ****  MODAL for buying tickest
+  ***/
+  openModal() {
+    this.modalbuy.open(this.event);
   }
 
 }

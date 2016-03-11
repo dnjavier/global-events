@@ -1,0 +1,61 @@
+<!-- <div class="modal"> -->
+  <div class="modal-header">
+    <h3 class="modal-title text-center">{{ modal.event.title }}</h3>
+  </div>
+  <div class="modal-body">
+
+    <!-- FIRST step -->
+    <div class="row" ng-if="!modal.secondStep">
+      <div class="col-md-4">
+        <p>Tickets Price:</p>
+        <h3>{{ modal.event.price }}</h3>
+      </div>
+
+      <div class="col-md-4 text-center">
+        <p class="qty">{{ modal.ticketsQTY }}</p>
+        <button class="button-circle"
+            ng-click="modal.operation('-')"><i class="fa fa-minus"></i></button>
+        <button class="button-circle"
+            ng-click="modal.operation('+')"><i class="fa fa-plus"></i></button>
+      </div>
+
+      <div class="col-md-4">
+        <p>Total:</p>
+        <h3>{{ modal.total }}</h3>
+      </div>
+    </div>
+
+    <!-- SECOND step -->
+    <div class="row" ng-if="modal.secondStep">
+      <div class="form-group col-md-6">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name">
+      </div>  
+      <div class="form-group col-md-6">
+        <label for="lastname">Lastname</label>
+        <input type="text" class="form-control" id="lastname">
+      </div> 
+      <div class="form-group col-md-12">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email">
+      </div>  
+      <div class="form-group col-md-6">
+        <label for="phone">Phone</label>
+        <input type="number" class="form-control" id="phone">
+      </div>      
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="modal.cancel()">Cancel</button>
+    <button class="btn btn-default" type="button" 
+      ng-click="modal.changeVar()"
+      ng-if="!modal.secondStep">Next</button>
+    <button class="btn btn-default" type="button" 
+      ng-click="modal.changeVar()"
+      ng-if="modal.secondStep">Back</button>
+    <button class="btn btn-primary" type="button" 
+      ng-click="modal.cancel()"
+      ng-if="modal.secondStep">Pay</button>
+  </div>
+<!-- </div> -->

@@ -1,0 +1,33 @@
+.modal, .modal-backdrop.in {
+  margin-bottom: -257px;
+}
+
+.modal-backdrop.in {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.button-circle {
+  border-radius: 100%;
+  background-color: #A8C545;
+  border-color: #A8C545;
+  color: white;
+  border: none;
+  padding: 0;
+  height: 30px;
+  width: 30px;
+}
+
+.modal-content {
+  background-color: #F3F3F3;
+}
+
+.btn-primary {
+  background-color: #A8C545;
+  border-color: #A8C545;  
+}
+
+.btn-primary:hover {
+  background-color: #A8C545;
+  border-color: #A8C545;  
+}
