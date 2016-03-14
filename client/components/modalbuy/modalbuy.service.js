@@ -27,7 +27,7 @@
       modalInstance.result.then(function (selectedItem) {
         selected = selectedItem;
       }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
+        //$log.info('Modal dismissed at: ' + new Date());
       });
 
     }   

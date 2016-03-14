@@ -4,11 +4,12 @@
 
 class NeweventController {
 
-  constructor(Auth, events, $state, $stateParams, Upload, cloudinary) {
+  constructor(Auth, events, $state, $stateParams, Upload, cloudinary, toastr) {
     var vm = this;
     vm.events = events;
     vm.$state = $state;
     vm._id = $stateParams._id;
+    vm.toastr = toastr;
     vm.edit = false;
     vm.getCurrentUser = Auth.getCurrentUser; //function  
     
@@ -47,22 +48,30 @@ class NeweventController {
     var setEvent = this.setEvent;
     var createToBD = this.createToBD;
     var splitURL = this.splitURL;
+    var toastr = this.toastr;
     this.cloudObj.data.file = document.getElementById('uploader').files[0];
 
-    if(this.validateFields(event)) {
+    if(this.validateFields(event, toastr)) {
       var callback;
       if(!this.edit){
         callback = this.createToBD;
       } else {
         callback = this.updateToDB;
       }
-      this.uploadImage(event, this.upload, this.cloudObj, callback, splitURL, events, $state);
+
+      if(typeof this.cloudObj.data.file === 'undefined'
+        && this.edit){
+        callback(events, event, $state, toastr);
+      } else {
+        this.uploadImage(event, this.upload, this.cloudObj, callback, splitURL, events, $state, toastr);
+      }
+      
     }
       
   }
 
   //Upload the image to Cloudinary
-  uploadImage(event, upload, cloudObj, callback, splitURL, events, $state) {
+  uploadImage(event, upload, cloudObj, callback, splitURL, events, $state, toastr) {
     event.file.upload = upload.upload(cloudObj)
     .progress(function (e) {
       event.file.progress = Math.round((e.loaded * 100.0) / e.total);
@@ -70,7 +79,7 @@ class NeweventController {
       
     }).success(function (data, status, headers, config) {
       event.image = splitURL(data.url);        
-      callback(events, event, $state);
+      callback(events, event, $state, toastr);
 
     }).error(function (data, status, headers, config) {
       event.file.result = data;
@@ -80,12 +89,12 @@ class NeweventController {
   }
 
   //Call the events service to save in DB
-  createToBD(events, event, $state) {
+  createToBD(events, event, $state, toastr) {
     events.create(event).then(function success(res){
-      console.log('success');
+      toastr.success('Event created');
       $state.go('profile.myevents');
     }, function error(res){
-      console.log('error');
+      toastr.error('An unexpected error ocurred', 'Error');
     });
   }
 
@@ -147,7 +156,7 @@ class NeweventController {
   }
 
   //All the inputs must be filled
-  validateFields(e){
+  validateFields(e, toastr){
     this.files = document.getElementById('uploader').files;
     e.file = this.files[0];
 
@@ -163,7 +172,7 @@ class NeweventController {
         return true;
       }
     }
-    console.log('Please fill out correctly');
+    toastr.error('Check required fileds', 'Error');
     return false;
   }
 
@@ -181,8 +190,9 @@ class NeweventController {
   }
 
   //Called when update the event
-  updateToDB(events, event, $state) {
+  updateToDB(events, event, $state, toastr) {
     events.updateEvent(event).then(response => {
+      toastr.success('Event updated');
       $state.go('profile.myevents')
     });   
   }

@@ -13,7 +13,8 @@ angular.module('appApp', [
   'ngAnimate',
   'validation.match',
   'ngFileUpload',
-  'cloudinary'
+  'cloudinary',
+  'toastr'
 ])
   .config(function($urlRouterProvider, $locationProvider) { //, cloudinaryProvider
     $urlRouterProvider

@@ -4,12 +4,13 @@
 
 class MyeventsController {
 
-  constructor(Auth, events) {
+  constructor(Auth, events, toastr) {
     var vm = this;
     vm.getCurrentUser = Auth.getCurrentUser;
     vm.events = events;
     vm.myEvents = [];
     vm.getEventsByOrganizer();
+    vm.toastr = toastr;
   }
 
   getEventsByOrganizer() {
@@ -31,6 +32,7 @@ class MyeventsController {
 
     //update events list
     this.getEventsByOrganizer();
+    this.toastr.success('Event deleted');
   }
 
 

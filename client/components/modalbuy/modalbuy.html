@@ -29,19 +29,19 @@
     <div class="row" ng-if="modal.secondStep">
       <div class="form-group col-md-6">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name">
+        <input type="text" class="form-control" id="name" ng-model="modal.sell.name">
       </div>  
       <div class="form-group col-md-6">
         <label for="lastname">Lastname</label>
-        <input type="text" class="form-control" id="lastname">
+        <input type="text" class="form-control" id="lastname" ng-model="modal.sell.lastname">
       </div> 
       <div class="form-group col-md-12">
         <label for="email">Email</label>
-        <input type="email" class="form-control" id="email">
+        <input type="email" class="form-control" id="email" ng-model="modal.sell.email">
       </div>  
       <div class="form-group col-md-6">
         <label for="phone">Phone</label>
-        <input type="number" class="form-control" id="phone">
+        <input type="number" class="form-control" id="phone" ng-model="modal.sell.phone">
       </div>      
     </div>
 
@@ -55,7 +55,7 @@
       ng-click="modal.changeVar()"
       ng-if="modal.secondStep">Back</button>
     <button class="btn btn-primary" type="button" 
-      ng-click="modal.cancel()"
+      ng-click="modal.checkPay(modal.sell)"
       ng-if="modal.secondStep">Pay</button>
   </div>
 <!-- </div> -->

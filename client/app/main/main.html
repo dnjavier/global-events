@@ -5,7 +5,7 @@
     <div class="row">
       
       <!-- category options -->
-      <div class="col-md-8 hidden-xs">
+      <div class="col-md-8 hidden-xs categories">
         <ul>
           <li ng-repeat="option in main.listOptions">
             <a ui-sref="catevents({ category: option.category })">
@@ -45,7 +45,7 @@
           <img ng-src="{{slide.image}}" class="img-responsive">
           <div class="carousel-caption">
             <div><h4>{{slide.title}}</h4>
-            <p>{{slide.title}}</p></div>
+            <p>{{slide.desc | limitTo: 55}}...</p></div>
           </div>
         </uib-slide>
       </uib-carousel>

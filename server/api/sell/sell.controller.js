@@ -1,32 +1,30 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/events              ->  index
- * POST    /api/events              ->  create
- * GET     /api/events/:id          ->  show
- * PUT     /api/events/:id          ->  update
- * DELETE  /api/events/:id          ->  destroy
+ * GET     /api/sells              ->  index
+ * POST    /api/sells              ->  create
+ * GET     /api/sells/:id          ->  show
+ * PUT     /api/sells/:id          ->  update
+ * DELETE  /api/sells/:id          ->  destroy
  */
 
 'use strict';
 
 import _ from 'lodash';
-import Event from './event.model';
-
-var cloudinary = require('cloudinary');
-cloudinary.config({ 
-  cloud_name: 'dlxqbg8py', 
-  api_key: '196557857115319', 
-  api_secret: '2RfZM-tnqLCQX19KmxuW4EMvT_Q' 
-});
+import Sell from './sell.model';
 
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
   return function(entity) {
     if (entity) {
+      //filterByOrganizer(res);
       res.status(statusCode).json(entity);
     }
   };
+}
+
+function filterByOrganizer(sells, organizer){
+  console.log(sells);
 }
 
 function saveUpdates(updates) {
@@ -67,43 +65,45 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Events
+// Gets a list of Sells
 export function index(req, res) {
-  Event.findAsync()
-    .then(respondWithResult(res))
+  Sell.find()
+    .populate('event')
+    .then(respondWithResult(res, req.params.organizer))
     .catch(handleError(res));
 }
 
-// Gets a single Event from the DB
+// Gets a single Sell from the DB
 export function show(req, res) {
-  Event.findByIdAsync(req.params.id)
+  Sell.findById(req.params.id)
+    .populate('event')
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Creates a new Event in the DB
+// Creates a new Sell in the DB
 export function create(req, res) {
-  Event.createAsync(req.body)
+  Sell.createAsync(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Updates an existing Event in the DB
+// Updates an existing Sell in the DB
 export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  Event.findByIdAsync(req.params.id)
+  Sell.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Deletes an Event from the DB
+// Deletes a Sell from the DB
 export function destroy(req, res) {
-  Event.findByIdAsync(req.params.id)
+  Sell.findByIdAsync(req.params.id)
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

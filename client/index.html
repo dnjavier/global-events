@@ -14,6 +14,7 @@
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css" />
+      <link rel="stylesheet" href="bower_components/angular-toastr/dist/angular-toastr.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -62,6 +63,7 @@
       <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
       <script src="bower_components/cloudinary-core/cloudinary-core.js"></script>
       <script src="bower_components/cloudinary_ng/js/angular.cloudinary.js"></script>
+      <script src="bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
       <!-- endbower -->
       <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-1.1.2.js"></script>
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.js"></script>
@@ -81,6 +83,8 @@
       <script src="app/account/profile/newevent/newevent.route.js"></script>
       <script src="app/account/profile/profile.controller.js"></script>
       <script src="app/account/profile/profile.route.js"></script>
+      <script src="app/account/profile/sells/sells.controller.js"></script>
+      <script src="app/account/profile/sells/sells.route.js"></script>
       <script src="app/account/settings/settings.controller.js"></script>
       <script src="app/account/settings/settings.route.js"></script>
       <script src="app/account/signup/signup.controller.js"></script>
@@ -108,7 +112,6 @@
       <script src="components/auth/user.service.js"></script>
       <script src="components/footer/footer.controller.js"></script>
       <script src="components/footer/footer.directive.js"></script>
-      <script src="components/modal/modal.service.js"></script>
       <script src="components/modalbuy/modalbuy.controller.js"></script>
       <script src="components/modalbuy/modalbuy.service.js"></script>
       <script src="components/mongoose-error/mongoose-error.directive.js"></script>
@@ -117,6 +120,7 @@
       <script src="components/oauth-buttons/oauth-buttons.controller.js"></script>
       <script src="components/oauth-buttons/oauth-buttons.directive.js"></script>
       <script src="components/services/events.service.js"></script>
+      <script src="components/services/sells.service.js"></script>
       <script src="components/sidebar/sidebar.controller.js"></script>
       <script src="components/sidebar/sidebar.directive.js"></script>
       <script src="components/socket/socket.service.js"></script>

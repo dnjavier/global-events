@@ -12,6 +12,8 @@ export default function(app) {
   console.log('server');
   app.use('/api/events', require('./api/event'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/sells', require('./api/sell'));
+
 
   app.use('/auth', require('./auth'));
 

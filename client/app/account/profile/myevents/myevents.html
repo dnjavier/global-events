@@ -6,9 +6,12 @@
         <p>{{e.date | date:'d'}}</p>
         <p>{{e.date | date:'MMM'}}</p>
       </div>
-      <h3>{{ e.title | limitTo: 19 }}</h3>
-      <p>{{ e.desc }}</p>
+      <h3 class="hidden-sm hidden-md">{{ e.title | limitTo: 12 }}</h3>
+      <h3 class="hidden-xs hidden-lg">{{ e.title | limitTo: 8 }}</h3>
+      <p class="hidden-sm hidden-md">{{ e.desc | limitTo: 120 }}...</p>
+      <p class="hidden-xs hidden-lg">{{ e.desc | limitTo: 80 }}...</p>
       <div class="event-buttons">
+        <!-- <a ui-sref="profile.sells" class="btn btn-default btn-sm">Sales</a> -->
         <a ui-sref="profile.newevent({_id: e._id})" class="btn btn-default btn-sm">Edit</a>
         <button class="btn btn-default btn-sm"
             ng-click="my.deleteEvent(e)">Delete</button>

@@ -11,7 +11,7 @@
       <h1>{{ events.event.title }}</h1>
       <p>Day: {{ events.event.date | date:'d' }}, {{events.event.date | date:'MMMM' }}</p>
       <p>Time: {{ events.event.openDoors | date:'h' }}:{{ events.event.openDoors | date:'mm' }} {{ events.event.openDoors | date:'a' }}</p>
-      <p>{{ events.event.desc }}</p>
+      <p class="event-desc">{{ events.event.desc }}</p>
       <p>{{ events.event.where }}</p>
       <p>Price: {{ events.event.price }}</p>
       <p>Organized by, {{ events.event.organizer }}</p>
@@ -44,7 +44,7 @@
                   <p>{{ evt.date | date:'MMM' }}</p>
                 </div>
                 <h3>{{ evt.title | limitTo: 15 }}...</h3>
-                <p>{{ evt.desc }}</p>
+                <p>{{ evt.desc | limitTo: 150 }}</p>
               </div>
               <a ui-sref="events({ idEvent: evt._id })">See more</a>
             </div>

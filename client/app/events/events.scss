@@ -17,13 +17,18 @@
     position: absolute;
     right: 0;
     color: #777;
+    overflow: auto;
 
     h1 {
-      font-size: 4rem;
+      font-size: 3.2rem;
     }
 
     p {
-      font-size: 2rem;
+      font-size: 1.6rem;
+    }
+
+    .event-desc {
+      font-size: 1.5rem;
     }
 
     .btn {
@@ -33,7 +38,7 @@
       margin: 0 auto;
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 1000px) {
       position: relative;
       margin: 15px;
       padding: 15px;
