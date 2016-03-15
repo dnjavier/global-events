@@ -48,14 +48,26 @@
   </div>
   <div class="modal-footer">
     <button class="btn btn-danger" type="button" ng-click="modal.cancel()">Cancel</button>
-    <button class="btn btn-default" type="button" 
+    <!-- <button class="btn btn-default" type="button" 
       ng-click="modal.changeVar()"
       ng-if="!modal.secondStep">Next</button>
     <button class="btn btn-default" type="button" 
       ng-click="modal.changeVar()"
-      ng-if="modal.secondStep">Back</button>
-    <button class="btn btn-primary" type="button" 
+      ng-if="modal.secondStep">Back</button> -->
+    <!-- <button class="btn btn-primary" type="button" 
       ng-click="modal.checkPay(modal.sell)"
-      ng-if="modal.secondStep">Pay</button>
+      ng-if="modal.secondStep">Pay</button> -->
+
+    <form action="" method="" ng-click="modal.checkPay(modal.sell)" class="form-modal">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_H48s1wmA7HTTi7Df4l2U7Lfm"
+        data-amount="{{ modal.event.price * 100 }}"
+        data-name="Global Events"
+        data-description="{{ modal.ticketsQTY }} tickets (${{ modal.event.price / modal.ticketsQTY }})"
+        data-image="/assets/images/g.png"
+        data-locale="auto">
+      </script>
+    </form>
   </div>
 <!-- </div> -->

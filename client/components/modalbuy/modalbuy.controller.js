@@ -53,17 +53,18 @@ class ModalController {
   pay(sell) {
     sell.qty = this.ticketsQTY;
 
-    if (this.validateFields(sell)) {
+    //if (this.validateFields(sell)) {
       this.sells.create(sell).then(response => {
         console.log('success');
         this.cancel();
       }, function error(res){
         console.log('error');
       });
-    }    
+    //}    
   }
 
   checkPay(sell) {
+    console.log('sell');
     let arr = [];
 
     this.sells.getAll().then(response => {
