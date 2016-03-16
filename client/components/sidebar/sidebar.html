@@ -12,6 +12,7 @@
     <li><a ui-sref=".myevents"><i class="fa fa-home"></i>My events</a></li>
     <li><a ui-sref="profile.newevent({_id: getCurrentUser().name})"><i class="fa fa-bullhorn"></i>New event</a></li>
     <li><a ui-sref=".sells"><i class="fa fa-money"></i>Sales</a></li>
+    <li><a ui-sref="settings"><i class="fa fa-cog"></i>Settings</a></li>
     <li><a ui-sref="logout"><i class="fa fa-sign-out"></i>Logout</a></li>
   </ul>
 
@@ -21,6 +22,7 @@
     <li><a ui-sref="profile.newevent({_id: getCurrentUser().name})"
         ng-click="profile.changeMenu()"><i class="fa fa-bullhorn"></i>New event</a></li>
     <li><a ui-sref=".sells" ng-click="profile.changeMenu()"><i class="fa fa-money"></i>Sales</a></li>
+    <li><a ui-sref="settings" ng-click="profile.changeMenu()"><i class="fa fa-cog"></i>Settings</a></li>
     <li><a ui-sref="logout"><i class="fa fa-sign-out"></i>Logout</a></li>
   </ul>
 

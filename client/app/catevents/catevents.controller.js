@@ -6,6 +6,7 @@ class CateventsController {
 
   constructor(events, $stateParams) {
     this.category = $stateParams.category;
+    this.noEvents = false;
 
     //Filtered events by Category
     events.getAll().then(response => {
@@ -18,12 +19,19 @@ class CateventsController {
           filtered.push(data[i]);
         }
       }
+      this.noEvents = this.checkEvents(filtered);
       this.eventsCategory = filtered;
     });
 
   }
 
-  //Functions
+  checkEvents(arr){
+    if(arr.length == 0){
+      return true;
+    }
+
+    return false;
+  }
 
 }
 
